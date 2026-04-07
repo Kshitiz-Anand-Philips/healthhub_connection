@@ -1,0 +1,11 @@
+export type PageStep = 'CONSENT' | 'GENERATING' | 'CONNECTION';
+
+export interface ConnectionData {
+  nativeUserId: string;
+  clientId: string;
+}
+
+export interface WebUser {
+  id: string;
+  name: string;
+}
