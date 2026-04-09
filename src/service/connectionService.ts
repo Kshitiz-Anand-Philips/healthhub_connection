@@ -12,6 +12,6 @@ export const generateMobileConnection = async (webUserId: string): Promise<Conne
         nativeUserId: newId,
         clientId: "PHILIPS_HPRINT_001"
       });
-    }, 1500); // 1.5s simulated latency
+    }, 0); // 1.5s simulated latency, changed it to 0 for faster testing.
   });
 };

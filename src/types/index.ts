@@ -1,4 +1,4 @@
-export type PageStep = 'CONSENT' | 'GENERATING' | 'CONNECTION';
+export type PageStep = 'PRE_CONSENT' | 'CONSENT' | 'GENERATING' | 'CONNECTION';
 
 export interface ConnectionData {
   nativeUserId: string;

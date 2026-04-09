@@ -1,27 +1,28 @@
 import { useState } from 'react';
-import type { PageStep, ConnectionData, WebUser } from './types';
+// Check this import path to make sure it points to your types file
+import type { PageStep, ConnectionData, WebUser } from './types'; 
 import { generateMobileConnection } from './service/connectionService';
+
+// Your Components
+import { PreConsentView } from './components/PreConsentView';
 import { ConsentView } from './components/ConsentView';
 import { SuccessView } from './components/SuccessView';
 
 const MOCK_USER: WebUser = { id: "WP-88293-XP", name: "John Doe" };
 
 function App() {
-  const [step, setStep] = useState<PageStep>('CONSENT');
+  // 1. Start the state at 'PRE_CONSENT'
+  const [step, setStep] = useState<PageStep>('PRE_CONSENT');
   const [connection, setConnection] = useState<ConnectionData | null>(null);
 
   const handleGenerateCode = async () => {
     try {
       setStep('GENERATING');
-      
-      // Await the response from our service (API)
       const data = await generateMobileConnection(MOCK_USER.id);
-      
       setConnection(data);
       setStep('CONNECTION');
     } catch (error) {
       console.error("Failed to generate code", error);
-      // Here you would handle a target error state
     }
   };
 
@@ -30,7 +31,15 @@ function App() {
       <h1>Philips Heartprint</h1>
       <hr />
 
-      {step === 'CONSENT' && <ConsentView onGenerate={handleGenerateCode} />}
+      {/* 2. Render the Gatekeeper first */}
+      {step === 'PRE_CONSENT' && (
+        <PreConsentView onProceed={() => setStep('CONSENT')} />
+      )}
+
+      {/* 3. The rest of the flow remains identical */}
+      {step === 'CONSENT' && (
+        <ConsentView onGenerate={handleGenerateCode} />
+      )}
       
       {step === 'GENERATING' && (
         <div style={{ textAlign: 'center', marginTop: '50px' }}>
@@ -38,7 +47,9 @@ function App() {
         </div>
       )}
       
-      {step === 'CONNECTION' && connection && <SuccessView connection={connection} />}
+      {step === 'CONNECTION' && connection && (
+        <SuccessView connection={connection} />
+      )}
     </div>
   );
 }
