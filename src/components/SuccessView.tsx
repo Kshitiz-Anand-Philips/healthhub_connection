@@ -6,7 +6,7 @@ interface Props {
 
 export const SuccessView = ({ connection }: Props) => {
   const triggerDeepLink = () => {
-    const url = `whatsapp://send?text=Your%20ID%20is%3A%20${connection.nativeUserId}`;
+    const url = `msteams://teams.microsoft.com/`;
     console.log("Triggering Deep Link:", url);
     window.location.href = url;
   };
