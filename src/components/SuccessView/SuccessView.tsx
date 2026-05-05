@@ -1,4 +1,5 @@
-import type { ConnectionData } from '../types';
+import type { ConnectionData } from '../../types';
+import styles from './SuccessView.module.scss';
 
 interface Props {
   connection: ConnectionData;
@@ -12,23 +13,24 @@ export const SuccessView = ({ connection }: Props) => {
   };
 
   return (
-    <div style={{ textAlign: 'center' }}>
+    <div className={styles.container}>
       <h3>Terms & Conditions</h3>
-      <div style={{ height: '150px', overflowY: 'scroll', border: '1px solid #ccc', padding: '10px', fontSize: '14px' }}>
+      <div className={styles.termsBox}>
         <p>By connecting, you agree to share your Heartprint data with the native mobile application...</p>
       </div>
+      
       <h3>Connection Ready</h3>
       <p>Your unique mobile ID:</p>
       
-      <div style={{ backgroundColor: '#f0f0f0', padding: '15px', fontSize: '20px', letterSpacing: '2px', fontWeight: 'bold', fontFamily: 'monospace' }}>
+      <div className={styles.idBox}>
         {connection.nativeUserId.match(/.{1,4}/g)?.join('-')}
       </div>
       
-      <p style={{ fontSize: '12px', color: '#666', marginTop: '10px' }}>Client: {connection.clientId}</p>
+      <p className={styles.clientInfo}>Client: {connection.clientId}</p>
 
       <button 
         onClick={triggerDeepLink}
-        style={{ marginTop: '30px', width: '100%', padding: '15px', backgroundColor: '#25D366', color: 'white', border: 'none', borderRadius: '5px', fontWeight: 'bold' }}
+        className={styles.connectButton}
       >
         Connect to Native App
       </button>

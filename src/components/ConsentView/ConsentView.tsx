@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import styles from './ConsentView.module.scss';
 
-interface Props {
-  onGenerate: () => void;
+interface Props { 
+  onGenerate: () => void; 
 }
 
 export const ConsentView = ({ onGenerate }: Props) => {
@@ -10,11 +11,11 @@ export const ConsentView = ({ onGenerate }: Props) => {
   return (
     <div>
       <h3>Terms & Conditions</h3>
-      <div style={{ height: '150px', overflowY: 'scroll', border: '1px solid #ccc', padding: '10px', fontSize: '14px' }}>
+      <div className={styles.termsBox}>
         <p>By connecting, you agree to share your Heartprint data with the native mobile application...</p>
       </div>
       
-      <label style={{ display: 'block', marginTop: '20px' }}>
+      <label className={styles.agreementLabel}>
         <input 
           type="checkbox" 
           checked={isAgreed} 
@@ -26,7 +27,8 @@ export const ConsentView = ({ onGenerate }: Props) => {
       <button 
         disabled={!isAgreed}
         onClick={onGenerate}
-        style={{ marginTop: '20px', width: '100%', padding: '10px', backgroundColor: isAgreed ? '#0066A1' : '#ccc', color: 'white', border: 'none', borderRadius: '5px' }}
+        className={styles.submitButton}
+        style={{ backgroundColor: isAgreed ? '#0066A1' : '#ccc' }}
       >
         Generate Connection Code
       </button>

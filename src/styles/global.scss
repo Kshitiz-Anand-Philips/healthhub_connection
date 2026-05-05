@@ -1,0 +1,21 @@
+@import './variables';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background-color: #fff;
+  color: $text-dark;
+  line-height: 1.5;
+}
+
+/* Force standard button appearance for iOS/Android consistency */
+button {
+  -webkit-appearance: none;
+  appearance: none;
+  font-family: inherit;
+}

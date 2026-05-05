@@ -4,9 +4,9 @@ import type { PageStep, ConnectionData, WebUser } from './types';
 import { generateMobileConnection } from './service/connectionService';
 
 // Your Components
-import { PreConsentView } from './components/PreConsentView';
-import { ConsentView } from './components/ConsentView';
-import { SuccessView } from './components/SuccessView';
+import { PreConsentView } from './components/PreConsentView/PreConsentView';
+import { ConsentView } from './components/ConsentView/ConsentView';
+import { SuccessView } from './components/SuccessView/SuccessView';
 
 const MOCK_USER: WebUser = { id: "WP-88293-XP", name: "John Doe" };
 
