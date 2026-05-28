@@ -9,9 +9,9 @@ export const generateMobileConnection = async (webUserId: string): Promise<Conne
       const newId = Math.floor(Math.random() * 1e14).toString().padStart(14, '0');
       
       resolve({
-        nativeUserId: newId,
-        clientId: "PHILIPS_HPRINT_001"
+        nativeUserId: "12345678901234",
+        clientId: "Careplix-internal"
       });
     }, 0); // 1.5s simulated latency, changed it to 0 for faster testing.
   });
-};
+};  
