@@ -4,10 +4,12 @@ import styles from './ConsentView.module.scss';
 // Callback to trigger connection code generation after consent
 interface Props { 
   onGenerate: () => void; 
+  isGenerating?: boolean;
+  error?: string | null;
 }
 
 // Displays T&C and requires user agreement before generating a connection code
-export const ConsentView = ({ onGenerate }: Props) => {
+export const ConsentView = ({ onGenerate, isGenerating = false, error = null }: Props) => {
   // Tracks whether the user has checked the agreement checkbox
   const [isAgreed, setIsAgreed] = useState(false);
 
@@ -28,13 +30,15 @@ export const ConsentView = ({ onGenerate }: Props) => {
       </label>
 
       <button 
-        disabled={!isAgreed}
+        disabled={!isAgreed || isGenerating}
         onClick={onGenerate}
         className={styles.submitButton}
-        style={{ backgroundColor: isAgreed ? '#0066A1' : '#ccc' }}
+        style={{ backgroundColor: isAgreed && !isGenerating ? '#0066A1' : '#ccc' }}
       >
-        Generate Connection Code
+        {isGenerating ? 'Generating Connection Code...' : 'Generate Connection Code'}
       </button>
+
+      {error && <p className={styles.errorText}>{error}</p>}
     </div>
   );
 };

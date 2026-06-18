@@ -111,6 +111,21 @@
   }
 }
 
+.backButton {
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px;
+  background: none;
+  border: none;
+  color: $text-muted;
+  font-size: 13px;
+  cursor: pointer;
+
+  &:hover {
+    color: $text-dark;
+  }
+}
+
 // ── Item 10: Desktop-only warning ────────────────────────────
 .desktopWarning {
   margin-top: 30px;

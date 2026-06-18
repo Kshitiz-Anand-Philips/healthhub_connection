@@ -11,9 +11,10 @@ type LinkStatus = 'idle' | 'attempted' | 'failed';
 
 interface Props {
   connection: ConnectionData;
+  onBack?: () => void;
 }
 
-export const SuccessView = ({ connection }: Props) => {
+export const SuccessView = ({ connection, onBack }: Props) => {
   const os = useDeviceOS();
   const [linkStatus, setLinkStatus] = useState<LinkStatus>('idle');
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -140,6 +141,12 @@ export const SuccessView = ({ connection }: Props) => {
             </a>
           )}
         </div>
+      )}
+
+      {onBack && (
+        <button type="button" onClick={onBack} className={styles.backButton}>
+          ← Back to Consent
+        </button>
       )}
     </div>
   );
