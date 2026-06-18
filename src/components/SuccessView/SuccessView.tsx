@@ -16,7 +16,6 @@ interface Props {
 export const SuccessView = ({ connection }: Props) => {
   const os = useDeviceOS();
   const [linkStatus, setLinkStatus] = useState<LinkStatus>('idle');
-  const [codeCopied, setCodeCopied] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const appOpenedRef = useRef(false);
 
@@ -24,7 +23,7 @@ export const SuccessView = ({ connection }: Props) => {
   useEffect(() => {
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
+    }; 
   }, []);
 
   // Items 1-3: Anchor-click deep link + visibility/blur detection + timeout fallback
@@ -71,22 +70,6 @@ export const SuccessView = ({ connection }: Props) => {
     a.click();
   };
 
-  // Item 5: Copy code with fallback for browsers without clipboard API
-  const handleCopyCode = async () => {
-    try {
-      await navigator.clipboard.writeText(connection.nativeUserId);
-    } catch {
-      const el = document.createElement('textarea');
-      el.value = connection.nativeUserId;
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand('copy');
-      document.body.removeChild(el);
-    }
-    setCodeCopied(true);
-    setTimeout(() => setCodeCopied(false), 2000);
-  };
-
   // Item 10: Desktop – deep linking is impossible; guide the user to open on mobile
   if (os === 'desktop') {
     return (
@@ -118,20 +101,6 @@ export const SuccessView = ({ connection }: Props) => {
       </div>
 
       <p className={styles.clientInfo}>Client: {connection.clientId}</p>
-
-      {/* Item 5: Manual recovery – always visible regardless of deep link status */}
-      <div className={styles.manualBox}>
-        <p className={styles.manualHint}>
-          If automatic connection fails, open the app manually and enter the code above.
-        </p>
-        <button
-          type="button"
-          className={`${styles.copyButton}${codeCopied ? ` ${styles.copyButtonSuccess}` : ''}`}
-          onClick={handleCopyCode}
-        >
-          {codeCopied ? '✓ Code Copied!' : 'Copy Code'}
-        </button>
-      </div>
 
       {/* Items 1-3: Primary connect button; disabled while the app-open check is in flight */}
       {linkStatus !== 'failed' && (

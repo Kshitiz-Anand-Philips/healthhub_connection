@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import styles from './ConsentView.module.scss';
 
+// Callback to trigger connection code generation after consent
 interface Props { 
   onGenerate: () => void; 
 }
 
+// Displays T&C and requires user agreement before generating a connection code
 export const ConsentView = ({ onGenerate }: Props) => {
+  // Tracks whether the user has checked the agreement checkbox
   const [isAgreed, setIsAgreed] = useState(false);
 
   return (

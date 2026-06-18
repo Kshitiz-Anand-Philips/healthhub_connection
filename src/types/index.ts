@@ -5,7 +5,3 @@ export interface ConnectionData {
   clientId: string;
 }
 
-export interface WebUser {
-  id: string;
-  name: string;
-}

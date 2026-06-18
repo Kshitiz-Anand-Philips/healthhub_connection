@@ -20,17 +20,19 @@ export const PreConsentView = ({ onProceed }: Props) => {
         
         {(os === 'android' || os === 'desktop') && (
           <a href={playStoreLink} target="_blank" rel="noreferrer">
-            <button className={styles.storeButton}>Download on Google Play</button>
+            <button className={styles.storeButton}>Download on Google Play</button>  
           </a>
         )}
-
+                      
         {(os === 'ios' || os === 'desktop') && (
           <a href={appleStoreLink} target="_blank" rel="noreferrer">
             <button className={styles.storeButton}>Download on the App Store</button>
           </a>
         )}
-      </div>
 
+        <p className={styles.returnHint}>Once installed, return to this page to proceed.</p>
+      </div>
+        
       <div className={styles.actionBox}>
         <p style={{ fontWeight: 'bold' }}>Step 2: Connect</p>
         <button className={styles.primaryButton} onClick={onProceed}>
