@@ -77,19 +77,13 @@ function ConsentRoute() {
 
 // `/connect` — requires both consent acceptance and connection data.
 function ConnectRoute() {
-  const navigate = useNavigate();
   const { consentAccepted, connection } = useFlow();
 
   if (!consentAccepted || !connection) {
     return <Navigate to="/" replace />;
   }
 
-  return (
-    <SuccessView
-      connection={connection}
-      onBack={() => navigate('/consent', { state: { fromPreConsent: true } })}
-    />
-  );
+  return <SuccessView connection={connection} />;
 }
 
 function App() {

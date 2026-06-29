@@ -20,7 +20,7 @@ export function readFlow(): FlowState {
     const parsed = JSON.parse(raw) as Record<string, unknown>;
     const consentAccepted = parsed.consentAccepted === true;
     const connection = isValidConnection(parsed.connection) ? parsed.connection : null;
-
+    
     return { consentAccepted, connection };
   } catch {
     clearFlow();
@@ -35,7 +35,7 @@ export function writeFlow(state: FlowState): void {
     // Storage unavailable (e.g. private mode); flow falls back to in-memory state.
   }
 }
-
+ 
 export function clearFlow(): void {
   try {
     sessionStorage.removeItem(STORAGE_KEY);

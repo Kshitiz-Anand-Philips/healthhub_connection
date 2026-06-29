@@ -11,10 +11,9 @@ type LinkStatus = 'idle' | 'attempted' | 'failed';
 
 interface Props {
   connection: ConnectionData;
-  onBack?: () => void;
 }
 
-export const SuccessView = ({ connection, onBack }: Props) => {
+export const SuccessView = ({ connection }: Props) => {
   const os = useDeviceOS();
   const [linkStatus, setLinkStatus] = useState<LinkStatus>('idle');
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -111,7 +110,7 @@ export const SuccessView = ({ connection, onBack }: Props) => {
           className={styles.connectButton}
           disabled={linkStatus === 'attempted'}
         >
-          {linkStatus === 'attempted' ? 'Opening App...' : 'Connect to Native App'}
+          {linkStatus === 'attempted' ? 'Opening App...' : 'Connect to HealthHub!'}
         </button>
       )}
 
@@ -143,11 +142,6 @@ export const SuccessView = ({ connection, onBack }: Props) => {
         </div>
       )}
 
-      {onBack && (
-        <button type="button" onClick={onBack} className={styles.backButton}>
-          ← Back to Consent
-        </button>
-      )}
     </div>
   );
 };
